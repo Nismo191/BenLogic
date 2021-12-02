@@ -8,4 +8,4 @@ __pycache__/
 *$py.class
 *.pyc
 
-key_data.py
+/key_data.py
