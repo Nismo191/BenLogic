@@ -1,17 +1,12 @@
 # Import Standard Libraries
-from datetime import datetime
 
 # Import Additional Libraries
 import pandas as pd
-from pandas.core.frame import DataFrame
 from openpyxl import load_workbook
-from numpy import NaN, nan
-import REST_operations as rest
 
 # Import Custom Libraries
 import file_operations
 import key_data as data
-import flow
 
 # Initialize Variables
 sites_array = data.sites_array
@@ -33,6 +28,7 @@ def load_files(data_url, template_url):
     template = load_workbook(template_url)
     return data, template
 
+# Unit class holds all of the calculations for a single unit
 class Unit():
     def __init__(self, site, unit, scheme, tVal, tCharge, standCharge, serviceCharge):
         self.site = site
@@ -44,7 +40,7 @@ class Unit():
         self.sum_service_charge = serviceCharge
 
     def __str__(self):
-        return f"{self.site} {self.unit} {self.scheme} {self.sum_transaction_value} {self.sum_transaction_charge} {self.sum_standard_charge} {self.sum_service_charge}"
+        return f"{self.site} | {self.unit} | {self.scheme} | {self.sum_transaction_value} | {self.sum_transaction_charge} | {self.sum_standard_charge} | {self.sum_service_charge}"
     
 
 
@@ -141,7 +137,7 @@ if __name__ == "__main__":
             
     # Print all records to the console for debugging
     for record in totals:
-        print(record.site, record.unit, record.scheme, record.sum_transaction_value, record.sum_transaction_charge, record.sum_standard_charge, record.sum_service_charge)
+        print(record.__str__())
 
     # Loop through the read range and then the totals array, where the Site/Unit/Scheme match, write the values to the write range for the current index
     # increment the index for the three additional vars
