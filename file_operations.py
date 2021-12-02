@@ -21,8 +21,8 @@ def write_json(file_name, data, debug=False):
         if debug:
             return os.stat(file_name)
 
-def read_excel(file_name, debug=False):
-    df = pandas.read_excel(file_name, 0, 48)
+def read_excel(file_name, start_row, debug=False):
+    df = pandas.read_excel(file_name, 0, start_row, engine='openpyxl')
     if debug:
         return df, os.stat(file_name)
     return df
